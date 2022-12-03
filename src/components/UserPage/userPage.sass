@@ -1,0 +1,55 @@
+main
+    display: grid
+    grid-template-columns: 65% 30%
+    column-gap: 5%
+    margin-top: 20px
+.profile
+    &__title
+        text-align: center
+        margin-bottom: 30px
+    &__form
+        display: block
+        margin: 0 auto
+        width: 70%
+    &__btn
+        margin-top: 20px
+.users
+    &__title
+        text-align: center
+    &__list
+        margin-top: 15px
+        &_item
+            cursor: pointer
+            &:hover
+                font-weight: bold
+.chat
+    &__title
+        text-align: center
+        margin-top: 20px
+    &__list
+        margin-top: 20px
+        width: 70%
+        margin: 0 auto
+
+@media (max-width: 991px)
+    .profile
+        &__form
+            width: 90%
+    .chat
+        &__list
+            width: 90%
+
+@media (max-width: 767px)
+    .profile
+        &__form
+            width: 100%
+    .chat
+        &__list
+            width: 100%
+
+@media (max-width: 575px)
+    main
+        display: block
+    .users
+        &__title
+            margin-top: 20px
