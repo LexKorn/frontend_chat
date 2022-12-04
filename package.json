@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "react": "^18.2.0",
+    "react-awesome-reveal": "^4.1.0",
     "react-bootstrap": "^2.6.0",
     "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0",

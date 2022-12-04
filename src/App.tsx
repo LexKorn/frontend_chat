@@ -15,22 +15,23 @@ function App() {
     const [users, setUsers] = useState<IUser[]>(local ? JSON.parse(local) : []);
     const [value, setValue] = useState<string>('');
     const [toggle, setToggle] = useState<boolean>(false);
-    const [toggle2, setToggle2] = useState<boolean>(false);
 
     useEffect(() => {
         sessionStorage.setItem('user', JSON.stringify(user));
-    }, [toggle]);
+        if (user.name) {
+            setUsers(users => [...users, user]);
+        }  
+    }, [user]);
+
+    // useEffect(() => {
+    //     if (user.name) {
+    //         setUsers(users => [...users, user]);
+    //     }        
+    // }, [user]);
 
     useEffect(() => {
         localStorage.setItem('users', JSON.stringify(users));
-    }, [toggle2]);
-
-    useEffect(() => {
-        if (user.name) {
-            setUsers(users => [...users, user]);
-            setToggle2(!toggle2); 
-        }        
-    }, [user]);
+    }, [users]);
 
     const createUser = () => {
         if (!value.trim()) {               
