@@ -22,13 +22,7 @@ function App() {
             setUsers(users => [...users, user]);
         }  
     }, [user]);
-
-    // useEffect(() => {
-    //     if (user.name) {
-    //         setUsers(users => [...users, user]);
-    //     }        
-    // }, [user]);
-
+    
     useEffect(() => {
         localStorage.setItem('users', JSON.stringify(users));
     }, [users]);

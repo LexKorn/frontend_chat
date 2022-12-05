@@ -27,10 +27,19 @@ const UserPage: React.FC<UserPageProps> = ({user}) => {
     : []);
 
     useEffect(() => {
-        if (message.text) {
-            setMessages([...receivedMessages, message]);
+        if (localMessages) {
+            setReceivedMessages(localMessages ? JSON.parse(localMessages) : []);    
+            setMessage({} as IMessage);    
         }          
-    }, [message]); 
+    }, [localMessages]); 
+
+    useEffect(() => {
+        if (message.text) {
+            setMessages([...receivedMessages, message]);           
+        } else {
+            setMessages(receivedMessages);
+        }
+    }, [message]);
 
     useEffect(() => {
         if (messages.length > 0) {
@@ -46,14 +55,9 @@ const UserPage: React.FC<UserPageProps> = ({user}) => {
         }
 
         setMessage({id: v4(), senderId: user.id, receiverId: selectedUser.id, text: text});
-        setText('');      
-        setReceivedMessages(localMessages ? JSON.parse(localMessages) : []);
+        setText('');
     };
-
-    const selectHandler = (item: IUser) => {
-        setSelectedUser(item);
-    };
-
+    
     
     return (
         <Container>
@@ -65,7 +69,6 @@ const UserPage: React.FC<UserPageProps> = ({user}) => {
             <main>
                 <div className="profile">
                     <h2 className="profile__title">Ваш профиль: <b>{user.name}</b></h2>
-
                     <Form className="profile__form">
                         <Form.Control as='textarea'
                             className="profile__input"
@@ -103,15 +106,14 @@ const UserPage: React.FC<UserPageProps> = ({user}) => {
                             <ListGroup.Item 
                                 key={item.id} 
                                 className={item.id === selectedUser.id ? "users__list_item active" : "users__list_item"} 
-                                onClick={() => selectHandler(item)}
+                                onClick={() => setSelectedUser(item)}
                                 >
                                 {item.name}
                             </ListGroup.Item>
                         )}
                     </ListGroup>
                 </div>
-            </main>
-            
+            </main>            
         </Container>
     );
 };
